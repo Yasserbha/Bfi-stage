@@ -60,6 +60,33 @@ public class Stagiaire implements Serializable {
 		this.age = age;
 		Homme = homme;
 	}
+	
+	
+
+
+
+	public Stagiaire(String name, String lastname, int age, String email, Sexe homme) {
+		super();
+		this.name = name;
+		this.lastname = lastname;
+		this.age = age;
+		this.email = email;
+		Homme = homme;
+	}
+
+
+	
+	
+
+	public Stagiaire(String name, String lastname, int age, String email, Sexe homme, StageDemande stagedemande) {
+		super();
+		this.name = name;
+		this.lastname = lastname;
+		this.age = age;
+		this.email = email;
+		Homme = homme;
+		this.stagedemande = stagedemande;
+	}
 
 
 
@@ -117,6 +144,18 @@ public class Stagiaire implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+
+
+	public StageDemande getStagedemande() {
+		return stagedemande;
+	}
+
+
+
+	public void setStagedemande(StageDemande stagedemande) {
+		this.stagedemande = stagedemande;
 	}
 
 

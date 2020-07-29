@@ -66,10 +66,9 @@ public class StageDemande implements Serializable {
 	
 	
 
-	public StageDemande(long id, String name, int numero, String lastname, String etabilssement, Date dateNaissance,
+	public StageDemande(String name, int numero, String lastname, String etabilssement, Date dateNaissance,
 			Date dateDebut, Date datefin, Niveau niv, TypeSatge type, String sujet, String cv, Stagiaire user) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.numero = numero;
 		this.lastname = lastname;
@@ -87,13 +86,24 @@ public class StageDemande implements Serializable {
 
 
 
-	public long getId() {
+	
+
+
+
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+
+
+
+	public void setId(Long id) {
 		this.id = id;
 	}
+
+
+
 
 	public String getName() {
 		return name;
