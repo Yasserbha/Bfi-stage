@@ -11,9 +11,9 @@ import tn.bfi.spring.entities.StageDemande;
 import tn.bfi.spring.repository.StageDemandeRepository;
 
 @Service
-public class DemandeSatgeServiceImpl implements IDemandeSatgeService {
+public class DemandeStageServiceImpl implements IDemandeStageService {
 
-	private static final Logger L= LogManager.getLogger(DemandeSatgeServiceImpl.class);
+	private static final Logger L= LogManager.getLogger(DemandeStageServiceImpl.class);
 	@Autowired
 	StageDemandeRepository demandesatgeRepository;
 	

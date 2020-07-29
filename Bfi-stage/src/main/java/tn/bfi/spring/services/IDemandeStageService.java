@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import tn.bfi.spring.entities.StageDemande;
 @Repository
-public interface IDemandeSatgeService {
+public interface IDemandeStageService {
 	
 	public StageDemande ajouterDemande(StageDemande demande);
 	public void supprimerDemande(long id);

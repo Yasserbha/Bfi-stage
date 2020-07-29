@@ -16,7 +16,7 @@ import tn.bfi.spring.entities.Sexe;
 import tn.bfi.spring.entities.StageDemande;
 import tn.bfi.spring.entities.Stagiaire;
 import tn.bfi.spring.entities.TypeSatge;
-import tn.bfi.spring.services.IDemandeSatgeService;
+import tn.bfi.spring.services.IDemandeStageService;
 import tn.bfi.spring.services.IStagiaireService;
 
 @RunWith(SpringRunner.class)
@@ -26,7 +26,7 @@ import tn.bfi.spring.services.IStagiaireService;
 	IStagiaireService sta;
 	
 	@Autowired
-	IDemandeSatgeService dem;
+	IDemandeStageService dem;
 	
 	@Test
 	public void contextLoads() throws ParseException {
