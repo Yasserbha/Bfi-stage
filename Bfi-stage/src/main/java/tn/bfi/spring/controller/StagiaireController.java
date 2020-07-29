@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,8 @@ import tn.bfi.spring.entities.Stagiaire;
 import tn.bfi.spring.services.IDemandeStageService;
 import tn.bfi.spring.services.IStagiaireService;
 
+
+@CrossOrigin(origins = "*")
 @Controller
 public class StagiaireController {
 	
@@ -24,36 +27,36 @@ public class StagiaireController {
 	@Autowired
 	IStagiaireService stagiaireService;
 	
-	// http://localhost:8081/SpringMVC/servlet/retrieve-all-users
-		@GetMapping("/retrieve-all-StageDemande")
+	// http://localhost:8081/SpringMVC/servlet/retrieve-all-Stagiaire
+		@GetMapping("/retrieve-all-Stagiaire")
 		@ResponseBody
-		public List<Stagiaire> getSatgeDemande() {
+		public List<Stagiaire> getStagiaire() {
 		List<Stagiaire> list= stagiaireService.retrieveAllStagiaire();
 		return list;
 		}
-		// http://localhost:8081/SpringMVC/servlet/retrieve-user/{SaleAd-id}
-		@GetMapping("/retrieve-StageDemande/{Stagiaire-id}")
+		// http://localhost:8081/SpringMVC/servlet/retrieve-user/{Stagiaire-id}
+		@GetMapping("/retrieve-Stagiaire/{Stagiaire-id}")
 		@ResponseBody
-		public Stagiaire retrieveSaleAd(@PathVariable("Stagiaire-id") Long StagiaireId) {
+		public Stagiaire retrieveStagiaire(@PathVariable("Stagiaire-id") Long StagiaireId) {
 		return stagiaireService.affichage(StagiaireId);
 		}
-		// Ajouter User : http://localhost:8081/SpringMVC/servlet/add-user
+		// Ajouter User : http://localhost:8081/SpringMVC/servlet/add-Stagiaire
 		@PostMapping("/add-Stagiaire")
 		@ResponseBody
 		public Stagiaire addStagiaire(@RequestBody Stagiaire u) {
 			Stagiaire stage= stagiaireService.ajouterStagiaire(u);
 		return stage;
 		}
-		// http://localhost:8081/SpringMVC/servlet/remove-user/{user-id}
-		@DeleteMapping("/remove-StageDemande/{StageDemande-id}")
+		// http://localhost:8081/SpringMVC/servlet/remove-Stagiaire/{Stagiaire-id}
+		@DeleteMapping("/remove-Stagiaire/{Stagiaire-id}")
 		@ResponseBody
 		public void removeStagiaire(@PathVariable("Stagiaire-id") Long StagiaireId) {
 			stagiaireService.supprimerStagiaire(StagiaireId);
 		}
-		// http://localhost:8081/SpringMVC/servlet/modify-user
+		// http://localhost:8081/SpringMVC/servlet/modify-Stagiaire
 		@PutMapping("/modify-Stagiaire")
 		@ResponseBody
-		public Stagiaire modifySaleAd(@RequestBody Stagiaire stage) {
+		public Stagiaire modifyStagiaire(@RequestBody Stagiaire stage) {
 		return stagiaireService.update(stage);
 		}
 

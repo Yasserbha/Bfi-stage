@@ -193,13 +193,7 @@ public class StageDemande implements Serializable {
 		this.cv = cv;
 	}
 
-	public Stagiaire getUser() {
-		return user;
-	}
-
-	public void setUser(Stagiaire user) {
-		this.user = user;
-	}
+	
 	
 
 }
