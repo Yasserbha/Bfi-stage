@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import tn.bfi.spring.entities.Stagiaire;
 @Repository
-public interface StagiaireRepository  extends CrudRepository<Stagiaire, Long> {
+public interface StagiaireRepository extends CrudRepository<Stagiaire, Long> {
 
 }
