@@ -34,10 +34,7 @@ public class StageDemande implements Serializable {
 	private String lastname ;
 	
 	private String etabilssement ;
-	
-	@Temporal(TemporalType.DATE)
-	private Date dateNaissance;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
 	
@@ -66,14 +63,13 @@ public class StageDemande implements Serializable {
 	
 	
 
-	public StageDemande(String name, int numero, String lastname, String etabilssement, Date dateNaissance,
+	public StageDemande(String name, int numero, String lastname, String etabilssement,
 			Date dateDebut, Date datefin, Niveau niv, TypeSatge type, String sujet, String cv, Stagiaire user) {
 		super();
 		this.name = name;
 		this.numero = numero;
 		this.lastname = lastname;
-		this.etabilssement = etabilssement;
-		this.dateNaissance = dateNaissance;
+		this.etabilssement = etabilssement;	
 		this.dateDebut = dateDebut;
 		this.datefin = datefin;
 		this.niv = niv;
@@ -137,13 +133,6 @@ public class StageDemande implements Serializable {
 		this.etabilssement = etabilssement;
 	}
 
-	public Date getDateNaissance() {
-		return dateNaissance;
-	}
-
-	public void setDateNaissance(Date dateNaissance) {
-		this.dateNaissance = dateNaissance;
-	}
 
 	public Date getDateDebut() {
 		return dateDebut;

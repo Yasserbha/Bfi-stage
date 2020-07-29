@@ -34,14 +34,13 @@ import tn.bfi.spring.services.IStagiaireService;
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date debut;
 		Date fin;
-		Date naissance;
+		
 		debut = dateFormat.parse("01/02/2015");
 		fin = dateFormat.parse("01/02/2015");
-		naissance = dateFormat.parse("01/02/2015");
 		
 		Stagiaire x = new Stagiaire("yasser","bha",24,"yasser.belhajali@esprit.tn",Sexe.homme);
 		sta.ajouterStagiaire(x);
-		StageDemande demande = new StageDemande(x.getName(),97105262,x.getLastname(),"esprit",naissance,debut,fin,Niveau.Cycle_ingenieur,TypeSatge.PFE,"test","test",x);
+		StageDemande demande = new StageDemande(x.getName(),97105262,x.getLastname(),"esprit",debut,fin,Niveau.Cycle_ingenieur,TypeSatge.PFE,"test","test",x);
 		dem.ajouterDemande(demande);
 		x.setStagedemande(demande);
 		sta.ajouterStagiaire(x);
