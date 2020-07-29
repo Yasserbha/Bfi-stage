@@ -34,12 +34,14 @@ public class Stagiaire implements Serializable {
 	
 	private int age ;
 	
+	private String mdp ;
+	
 	
 	@Column(unique=true,name = "adresseEmail")
 	private String email;
 	
 	@Enumerated(EnumType.STRING)
-	Sexe Homme;
+	Sexe sexe;
 	
 	@OneToOne
 	private StageDemande stagedemande;
@@ -53,39 +55,49 @@ public class Stagiaire implements Serializable {
 	
 	
 
-	public Stagiaire(String name, String lastname, int age, Sexe homme) {
-		super();
-		this.name = name;
-		this.lastname = lastname;
-		this.age = age;
-		Homme = homme;
-	}
-	
 	
 
 
 
-	public Stagiaire(String name, String lastname, int age, String email, Sexe homme) {
+	public Stagiaire(String name, String lastname, int age, String mdp, String email, Sexe sexe) {
 		super();
 		this.name = name;
 		this.lastname = lastname;
 		this.age = age;
+		this.mdp = mdp;
 		this.email = email;
-		Homme = homme;
+		this.sexe = sexe;
 	}
 
 
-	
-	
 
-	public Stagiaire(String name, String lastname, int age, String email, Sexe homme, StageDemande stagedemande) {
+
+
+
+
+	public Stagiaire(String name, String lastname, int age, String mdp, String email, Sexe sexe,
+			StageDemande stagedemande) {
 		super();
 		this.name = name;
 		this.lastname = lastname;
 		this.age = age;
+		this.mdp = mdp;
 		this.email = email;
-		Homme = homme;
+		this.sexe = sexe;
 		this.stagedemande = stagedemande;
+	}
+
+
+
+
+	public String getMdp() {
+		return mdp;
+	}
+
+
+
+	public void setMdp(String mdp) {
+		this.mdp = mdp;
 	}
 
 
@@ -114,12 +126,12 @@ public class Stagiaire implements Serializable {
 		this.age = age;
 	}
 
-	public Sexe getHomme() {
-		return Homme;
+	public Sexe getSexe() {
+		return sexe;
 	}
 
-	public void setHomme(Sexe homme) {
-		Homme = homme;
+	public void setSexe(Sexe sexe) {
+		this.sexe = sexe;
 	}
 
 

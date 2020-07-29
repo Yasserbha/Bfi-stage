@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import tn.bfi.spring.entities.Stagiaire;
 import tn.bfi.spring.repository.StagiaireRepository;
+import tn.bfi.spring.security.AES;
 
 @Service
 public class StagiaireServiceImpl implements IStagiaireService {
@@ -19,9 +20,13 @@ public class StagiaireServiceImpl implements IStagiaireService {
 	@Autowired
 	StagiaireRepository stagiairerepository;
 	
+	final String secretKey = "yasserbelhajali2013";
+	
 	@Override
 	public Stagiaire ajouterStagiaire(Stagiaire stagiaire) {
-		
+		String pass; 
+		pass = AES.encrypt(stagiaire.getMdp(), secretKey);
+		stagiaire.setMdp(pass);
 		return stagiairerepository.save(stagiaire);
 	}
 
