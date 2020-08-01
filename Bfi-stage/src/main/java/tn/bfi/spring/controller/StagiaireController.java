@@ -3,11 +3,10 @@ package tn.bfi.spring.controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletContext;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,26 +20,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
+
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
- 
-import javax.servlet.ServletContext;
- 
+import java.io.FileOutputStream;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
+
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import tn.bfi.spring.config.MediaTypeUtils;
-import tn.bfi.spring.entities.StageDemande;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+
+import org.springframework.web.multipart.MultipartFile;
+
+
+
 import tn.bfi.spring.entities.Stagiaire;
-import tn.bfi.spring.services.IDemandeStageService;
+
 import tn.bfi.spring.services.IStagiaireService;
 
 
@@ -85,34 +80,27 @@ public class StagiaireController {
 		return stagiaireService.update(stage);
 		}
 		
-		/////////////////////////////////////////////////uplode Pdf Cv ////////////
-		    private static final String DIRECTORY = "C:/PDF";
-		    private static final String DEFAULT_FILE_NAME = "java-tutorial.pdf";
-		 
-		    @Autowired
-		    private ServletContext servletContext;
-		 
-		    // http://localhost:8080/download1?fileName=abc.zip
-		    // Using ResponseEntity<InputStreamResource>
-		    @RequestMapping("/download1")
-		    public ResponseEntity<InputStreamResource> downloadFile1(
-		            @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
-		 
-		        MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
-		        System.out.println("fileName: " + fileName);
-		        System.out.println("mediaType: " + mediaType);
-		 
-		        File file = new File(DIRECTORY + "/" + fileName);
-		        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-		 
-		        return ResponseEntity.ok()
-		                // Content-Disposition
-		                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
-		                // Content-Type
-		                .contentType(mediaType)
-		                // Contet-Length
-		                .contentLength(file.length()) //
-		                .body(resource);
-		    }
+		/////////////////////////////////////////////////uplode Pdf Cv erruer in postman ////////////
+		@RequestMapping(value = "/upload",
+				method = RequestMethod.POST,
+				consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+
+		public String fileUpload(@RequestParam("file") MultipartFile file) throws IOException
+		{
+			File convertFile = new File("C:/pdf/" + file.getOriginalFilename());
+			convertFile.createNewFile();
+
+			try (FileOutputStream fout = new FileOutputStream(convertFile))
+			{
+				fout.write(file.getBytes());
+			}
+			catch (Exception exe)
+			{
+				exe.printStackTrace();
+			}
+			return "File has uploaded successfully";
+		}
+		
+		/////////////////////////////
 
 }

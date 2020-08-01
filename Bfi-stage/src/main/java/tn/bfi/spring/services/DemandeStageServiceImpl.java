@@ -1,13 +1,17 @@
 package tn.bfi.spring.services;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import tn.bfi.spring.entities.StageDemande;
+import tn.bfi.spring.entities.TypeSatge;
 import tn.bfi.spring.repository.StageDemandeRepository;
 
 @Service
@@ -50,6 +54,22 @@ public class DemandeStageServiceImpl implements IDemandeStageService {
 	@Override
 	public Long nbrdemande() {		
 		return demandesatgeRepository.count();
+	}
+
+	@Override
+	public void uploadFile(MultipartFile file) {
+		try {
+			file.transferTo(new File ("C:\\pdf\\"+file.getOriginalFilename()));
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public List<StageDemande> getDemandeByNameTypeJPQL(String name, TypeSatge type) {
+		return demandesatgeRepository.getDemandeByNameTypeJPQL(name, type);
 	}
 
 }

@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import tn.bfi.spring.entities.StageDemande;
+import tn.bfi.spring.entities.TypeSatge;
 import tn.bfi.spring.services.IDemandeStageService;
+
 
 
 @CrossOrigin(origins = "*")
@@ -56,6 +60,17 @@ public class StageDemandeController {
 		public StageDemande modifySaleAd(@RequestBody StageDemande demande) {
 		return stage.update(demande);
 		}
-
-	
+		
+		@PostMapping("/add-Image")
+		public void uploadFile(@RequestParam("file")MultipartFile file){
+			stage.uploadFile(file);
+			
+		}
+		
+		 // URL : http://localhost:8081/SpringMVC/servlet/getSalaireByEmployeIdJPQL/2
+	    @GetMapping(value = "getCustomerBynameroleJPQL/{name}/{type}")
+	    @ResponseBody
+		public List<StageDemande> getCustomerBynameroleJPQL(@PathVariable("name")String name,@PathVariable("type")TypeSatge type) {
+			return stage.getDemandeByNameTypeJPQL(name, type);
+		}
 }
