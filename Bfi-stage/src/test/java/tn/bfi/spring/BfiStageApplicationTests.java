@@ -27,11 +27,13 @@ import tn.bfi.spring.services.IStagiaireService;
 	
 	@Autowired
 	IDemandeStageService dem;
+	Stagiaire x ;
+	StageDemande y;
 	
 	@Test
 	public void contextLoads() throws ParseException {
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	/*	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date debut;
 		Date fin;
 		
@@ -44,9 +46,12 @@ import tn.bfi.spring.services.IStagiaireService;
 		dem.ajouterDemande(demande);
 		x.setStagedemande(demande);
 		sta.ajouterStagiaire(x);
+		*/
 		
-		
-		
+		x = sta.getDemandeByNameJPQL("yy", 23);
+		y=dem.affichage(1);
+		x.setStagedemande(y);
+		sta.ajouterStagiaire(x);
 		
 		
 	}

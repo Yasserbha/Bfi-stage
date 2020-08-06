@@ -90,6 +90,25 @@ public class Stagiaire implements Serializable {
 
 
 
+	public Stagiaire(Long id, String name, String lastname, int age, String mdp, String email, Sexe sexe,
+			StageDemande stagedemande) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.lastname = lastname;
+		this.age = age;
+		this.mdp = mdp;
+		this.email = email;
+		this.sexe = sexe;
+		this.stagedemande = stagedemande;
+	}
+
+
+
+
+
+
+
 	public String getMdp() {
 		return mdp;
 	}
@@ -168,6 +187,18 @@ public class Stagiaire implements Serializable {
 
 	public void setStagedemande(StageDemande stagedemande) {
 		this.stagedemande = stagedemande;
+	}
+
+
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "Stagiaire [id=" + id + ", name=" + name + ", lastname=" + lastname + ", age=" + age + ", mdp=" + mdp
+				+ ", email=" + email + ", sexe=" + sexe + ", stagedemande=" + stagedemande + "]";
 	}
 
 

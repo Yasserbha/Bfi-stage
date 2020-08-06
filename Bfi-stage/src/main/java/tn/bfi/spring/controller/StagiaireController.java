@@ -32,10 +32,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.springframework.web.multipart.MultipartFile;
 
-
-
+import tn.bfi.spring.entities.StageDemande;
 import tn.bfi.spring.entities.Stagiaire;
-
+import tn.bfi.spring.entities.TypeSatge;
 import tn.bfi.spring.services.IStagiaireService;
 
 
@@ -78,6 +77,13 @@ public class StagiaireController {
 		@ResponseBody
 		public Stagiaire modifyStagiaire(@RequestBody Stagiaire stage) {
 		return stagiaireService.update(stage);
+		}
+		
+		 // URL : http://localhost:8081/SpringMVC/servlet/getSalaireByEmployeIdJPQL/2
+	    @GetMapping(value = "getCustomerBynameJPQL/{name}/{age}")
+	    @ResponseBody
+		public Stagiaire getCustomerBynameJPQL(@PathVariable("name")String name,@PathVariable("age")int age) {
+			return stagiaireService.getDemandeByNameJPQL(name, age);
 		}
 		
 		/////////////////////////////////////////////////uplode Pdf Cv erruer in postman ////////////

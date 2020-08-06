@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import tn.bfi.spring.entities.StageDemande;
 import tn.bfi.spring.entities.Stagiaire;
 import tn.bfi.spring.repository.StagiaireRepository;
 import tn.bfi.spring.security.AES;
@@ -17,9 +17,24 @@ public class StagiaireServiceImpl implements IStagiaireService {
 
 	private static final Logger L= LogManager.getLogger(StagiaireServiceImpl.class);
 		
+	
 	@Autowired
 	StagiaireRepository stagiairerepository;
 	
+	public Stagiaire stagee;
+	
+	
+
+	public Stagiaire getStagee() {
+		return stagee;
+	}
+
+
+
+	public void setStagee(Stagiaire stagee) {
+		this.stagee = stagee;
+	}
+
 	final String secretKey = "yasserbelhajali2013";
 	
 	@Override
@@ -27,8 +42,13 @@ public class StagiaireServiceImpl implements IStagiaireService {
 		String pass; 
 		pass = AES.encrypt(stagiaire.getMdp(), secretKey);
 		stagiaire.setMdp(pass);
-		return stagiairerepository.save(stagiaire);
+		//System.out.print(stagiaire.getName()+"tessssst");*
+		stagiairerepository.save(stagiaire);
+		this.stagee = stagiaire;
+		return null ;
 	}
+	
+	
 
 	@Override
 	public void supprimerStagiaire(long id) {
@@ -52,6 +72,12 @@ public class StagiaireServiceImpl implements IStagiaireService {
 	public Stagiaire update(Stagiaire stagiaire) {
 		
 		return stagiairerepository.save(stagiaire) ;
+	}
+
+	@Override
+	public Stagiaire getDemandeByNameJPQL(String name, int age) {
+		
+		return stagiairerepository.getDemandeByNameJPQL(name, age) ;
 	}
 
 }

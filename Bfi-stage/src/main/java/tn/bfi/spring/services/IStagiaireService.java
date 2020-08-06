@@ -2,6 +2,8 @@ package tn.bfi.spring.services;
 
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
+
 import tn.bfi.spring.entities.StageDemande;
 import tn.bfi.spring.entities.Stagiaire;
 
@@ -12,5 +14,6 @@ public interface IStagiaireService {
 	public List<Stagiaire> retrieveAllStagiaire();
 	public Stagiaire affichage(long id);
 	public Stagiaire update(Stagiaire stagiaire);
+	  public Stagiaire getDemandeByNameJPQL(String name, int age);
 
 }
