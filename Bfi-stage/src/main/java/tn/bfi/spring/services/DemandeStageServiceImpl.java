@@ -28,22 +28,38 @@ public class DemandeStageServiceImpl implements IDemandeStageService {
 	Stagiaire x;
 	
 	
-	public String cvname=null;
+	public String cvname;
+	
 	
 	@Override
-	public StageDemande ajouterDemande(StageDemande demande) {
-		System.out.print(serstage.stagee.getName()+"tesssssst");
-		demande.setCv(cvname);
-		if (serstage.stagee.getName() == null && serstage.stagee.getAge() == 0 ){
-			demandesatgeRepository.save(demande);
-			return null;
-		}else{
-		x=test.getDemandeByNameJPQL(serstage.stagee.getName(), serstage.stagee.getAge());
-		demandesatgeRepository.save(demande);
-		x.setStagedemande(demande);
-		test.update(x);
-		return null;}
+	public List<StageDemande> getDemandeByNameTypeJPQL(String name, TypeSatge type) {
+		return demandesatgeRepository.getDemandeByNameTypeJPQL(name, type);
 	}
+
+	@Override
+	public void uploadFile(MultipartFile file) {
+		try {
+			StageDemande x = new StageDemande();
+			cvname = file.getOriginalFilename();
+			file.transferTo(new File ("C:\\pdf\\"+file.getOriginalFilename()));
+			System.out.print(cvname+"uplodefile");
+		
+			
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+
+	@Override
+	public StageDemande ajouterDemande(StageDemande demande) {
+		demande.setCv(cvname);
+	System.out.print(cvname+"ajouteeeeeeeeer");
+		return demandesatgeRepository.save(demande);
+		}
+	
 
 	@Override
 	public void supprimerDemande(long id) {
@@ -76,24 +92,6 @@ public class DemandeStageServiceImpl implements IDemandeStageService {
 
 
 
-	@Override
-	public List<StageDemande> getDemandeByNameTypeJPQL(String name, TypeSatge type) {
-		return demandesatgeRepository.getDemandeByNameTypeJPQL(name, type);
-	}
-
-	@Override
-	public void uploadFile(MultipartFile file) {
-		try {
-			StageDemande x = new StageDemande();
-			cvname = file.getOriginalFilename();
-			file.transferTo(new File ("C:\\pdf\\"+file.getOriginalFilename()));
-		
-			
-		} catch (IllegalStateException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+	
 
 }

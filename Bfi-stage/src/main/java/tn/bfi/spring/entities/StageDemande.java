@@ -26,14 +26,19 @@ public class StageDemande implements Serializable {
 	@Column(name = "id")
 	private Long id; 
 	
-	private String name ;
+	private String nom ;
 	
 	@Column(name ="phoneNumber")
 	private int numero;
 	
-	private String lastname ;
+	private String prenom ;
+	
+	private String email ;
 	
 	private String etabilssement ;
+	
+	@Temporal(TemporalType.DATE)
+	private Date dateNaissance;
 
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
@@ -42,47 +47,95 @@ public class StageDemande implements Serializable {
 	private Date datefin;
 	
 	@Enumerated(EnumType.STRING)
-	private Niveau niv ;
-
+	private Niveau diplome;
+	
+	@Enumerated(EnumType.STRING)
+	private Classe classe ;
+	
 	@Enumerated(EnumType.STRING)
 	private TypeSatge type ; 
 	
+	@Enumerated(EnumType.STRING)
+	private StageOF stageof ;
+	
 	private String sujet;
+	
+	private String description;
 	
 	private String cv;
 	
+	private String demande;
+	
+	
 	@OneToOne(mappedBy="stagedemande")
 	private Stagiaire user;
+	
 	
 	
 
 	public StageDemande() {
 		super();
 	}
-	
-	
-	
 
-	public StageDemande(String name, int numero, String lastname, String etabilssement,
-			Date dateDebut, Date datefin, Niveau niv, TypeSatge type, String sujet, String cv, Stagiaire user) {
+	
+		
+
+
+
+
+	public StageDemande(String nom, int numero, String prenom, String email, String etabilssement, Date dateNaissance,
+			Date dateDebut, Date datefin, Niveau diplome, Classe classe, TypeSatge type, StageOF stageof, String sujet,
+			String description, String cv, String demande) {
 		super();
-		this.name = name;
+		this.nom = nom;
 		this.numero = numero;
-		this.lastname = lastname;
-		this.etabilssement = etabilssement;	
+		this.prenom = prenom;
+		this.email = email;
+		this.etabilssement = etabilssement;
+		this.dateNaissance = dateNaissance;
 		this.dateDebut = dateDebut;
 		this.datefin = datefin;
-		this.niv = niv;
+		this.diplome = diplome;
+		this.classe = classe;
 		this.type = type;
+		this.stageof = stageof;
 		this.sujet = sujet;
+		this.description = description;
 		this.cv = cv;
-		this.user = user;
+		this.demande = demande;
 	}
 
 
 
 
-	
+
+
+
+	public StageDemande(String nom, int numero, String prenom, String email, String etabilssement, Date dateNaissance,
+			Date dateDebut, Date datefin, Niveau diplome, Classe classe, TypeSatge type, StageOF stageof, String sujet,
+			String description, String cv, String demande, Stagiaire user) {
+		super();
+		this.nom = nom;
+		this.numero = numero;
+		this.prenom = prenom;
+		this.email = email;
+		this.etabilssement = etabilssement;
+		this.dateNaissance = dateNaissance;
+		this.dateDebut = dateDebut;
+		this.datefin = datefin;
+		this.diplome = diplome;
+		this.classe = classe;
+		this.type = type;
+		this.stageof = stageof;
+		this.sujet = sujet;
+		this.description = description;
+		this.cv = cv;
+		this.demande = demande;
+		this.user = user;
+	}
+
+
+
 
 
 
@@ -93,95 +146,226 @@ public class StageDemande implements Serializable {
 
 
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
 
 
 
-
-	public String getName() {
-		return name;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+
+
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
+
+
 
 	public int getNumero() {
 		return numero;
 	}
 
+
+
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
 
-	public String getLastname() {
-		return lastname;
+
+
+	public String getPrenom() {
+		return prenom;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
 
 	public String getEtabilssement() {
 		return etabilssement;
 	}
+
+
 
 	public void setEtabilssement(String etabilssement) {
 		this.etabilssement = etabilssement;
 	}
 
 
+
+	public Date getDateNaissance() {
+		return dateNaissance;
+	}
+
+
+
+	public void setDateNaissance(Date dateNaissance) {
+		this.dateNaissance = dateNaissance;
+	}
+
+
+
 	public Date getDateDebut() {
 		return dateDebut;
 	}
+
+
 
 	public void setDateDebut(Date dateDebut) {
 		this.dateDebut = dateDebut;
 	}
 
+
+
 	public Date getDatefin() {
 		return datefin;
 	}
+
+
 
 	public void setDatefin(Date datefin) {
 		this.datefin = datefin;
 	}
 
-	public Niveau getNiv() {
-		return niv;
+
+
+	public Niveau getDiplome() {
+		return diplome;
 	}
 
-	public void setNiv(Niveau niv) {
-		this.niv = niv;
+
+
+	public void setDiplome(Niveau diplome) {
+		this.diplome = diplome;
 	}
+
+
+
+	public Classe getClasse() {
+		return classe;
+	}
+
+
+
+	public void setClasse(Classe classe) {
+		this.classe = classe;
+	}
+
+
 
 	public TypeSatge getType() {
 		return type;
 	}
 
+
+
 	public void setType(TypeSatge type) {
 		this.type = type;
 	}
+
+
 
 	public String getSujet() {
 		return sujet;
 	}
 
+
+
 	public void setSujet(String sujet) {
 		this.sujet = sujet;
 	}
+
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
 
 	public String getCv() {
 		return cv;
 	}
 
+
+
 	public void setCv(String cv) {
 		this.cv = cv;
 	}
 
+
+
+	public String getDemande() {
+		return demande;
+	}
+
+
+
+	public void setDemande(String demande) {
+		this.demande = demande;
+	}
+
+
+
+	public Stagiaire getUser() {
+		return user;
+	}
+
+
+
+	public void setUser(Stagiaire user) {
+		this.user = user;
+	}
+
+
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "StageDemande [id=" + id + ", nom=" + nom + ", numero=" + numero + ", prenom=" + prenom + ", email="
+				+ email + ", etabilssement=" + etabilssement + ", dateNaissance=" + dateNaissance + ", dateDebut="
+				+ dateDebut + ", datefin=" + datefin + ", diplome=" + diplome + ", classe=" + classe + ", type=" + type
+				+ ", stageof=" + stageof + ", sujet=" + sujet + ", description=" + description + ", cv=" + cv
+				+ ", demande=" + demande + ", user=" + user + "]";
+	}
+
+
+	
+
+	
+	
+	
+	
+	
+	
 	
 	
 
