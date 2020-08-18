@@ -2,18 +2,24 @@ package tn.bfi.spring.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+
 
 
 
@@ -58,6 +64,9 @@ public class StageDemande implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private StageOF stageof ;
 	
+	@Enumerated(EnumType.STRING)
+	private Etat status ;
+	
 	private String sujet;
 	
 	private String description;
@@ -70,6 +79,9 @@ public class StageDemande implements Serializable {
 	@OneToOne(mappedBy="stagedemande")
 	private Stagiaire user;
 	
+	@OneToMany(cascade =CascadeType.ALL,mappedBy="stagedemande" ,fetch=FetchType.EAGER)
+    private Set<Livrable> Livrables;
+	
 	
 	
 
@@ -79,36 +91,6 @@ public class StageDemande implements Serializable {
 
 	
 		
-
-
-
-
-	public StageDemande(String nom, int numero, String prenom, String email, String etabilssement, Date dateNaissance,
-			Date dateDebut, Date datefin, Niveau diplome, Classe classe, TypeSatge type, StageOF stageof, String sujet,
-			String description, String cv, String demande) {
-		super();
-		this.nom = nom;
-		this.numero = numero;
-		this.prenom = prenom;
-		this.email = email;
-		this.etabilssement = etabilssement;
-		this.dateNaissance = dateNaissance;
-		this.dateDebut = dateDebut;
-		this.datefin = datefin;
-		this.diplome = diplome;
-		this.classe = classe;
-		this.type = type;
-		this.stageof = stageof;
-		this.sujet = sujet;
-		this.description = description;
-		this.cv = cv;
-		this.demande = demande;
-	}
-
-
-
-
-
 
 
 	public StageDemande(String nom, int numero, String prenom, String email, String etabilssement, Date dateNaissance,
@@ -132,6 +114,101 @@ public class StageDemande implements Serializable {
 		this.cv = cv;
 		this.demande = demande;
 		this.user = user;
+	}
+
+
+
+
+	public StageDemande(String nom, int numero, String prenom, String email, String etabilssement, Date dateNaissance,
+			Date dateDebut, Date datefin, Niveau diplome, Classe classe, TypeSatge type, StageOF stageof, Etat status,
+			String sujet, String description, String cv, String demande, Stagiaire user) {
+		super();
+		this.nom = nom;
+		this.numero = numero;
+		this.prenom = prenom;
+		this.email = email;
+		this.etabilssement = etabilssement;
+		this.dateNaissance = dateNaissance;
+		this.dateDebut = dateDebut;
+		this.datefin = datefin;
+		this.diplome = diplome;
+		this.classe = classe;
+		this.type = type;
+		this.stageof = stageof;
+		this.status = status;
+		this.sujet = sujet;
+		this.description = description;
+		this.cv = cv;
+		this.demande = demande;
+		this.user = user;
+	}
+
+
+
+
+
+
+	public StageDemande(String nom, int numero, String prenom, String email, String etabilssement, Date dateNaissance,
+			Date dateDebut, Date datefin, Niveau diplome, Classe classe, TypeSatge type, StageOF stageof, Etat status,
+			String sujet, String description, String cv, String demande, Stagiaire user, Set<Livrable> livrables) {
+		super();
+		this.nom = nom;
+		this.numero = numero;
+		this.prenom = prenom;
+		this.email = email;
+		this.etabilssement = etabilssement;
+		this.dateNaissance = dateNaissance;
+		this.dateDebut = dateDebut;
+		this.datefin = datefin;
+		this.diplome = diplome;
+		this.classe = classe;
+		this.type = type;
+		this.stageof = stageof;
+		this.status = status;
+		this.sujet = sujet;
+		this.description = description;
+		this.cv = cv;
+		this.demande = demande;
+		this.user = user;
+		Livrables = livrables;
+	}
+
+
+
+
+
+	public StageOF getStageof() {
+		return stageof;
+	}
+
+
+
+
+
+
+
+	public void setStageof(StageOF stageof) {
+		this.stageof = stageof;
+	}
+
+
+
+
+
+
+
+	public Etat getStatus() {
+		return status;
+	}
+
+
+
+
+
+
+
+	public void setStatus(Etat status) {
+		this.status = status;
 	}
 
 
@@ -346,16 +423,34 @@ public class StageDemande implements Serializable {
 
 
 
-
-
 	@Override
 	public String toString() {
-		return "StageDemande [id=" + id + ", nom=" + nom + ", numero=" + numero + ", prenom=" + prenom + ", email="
-				+ email + ", etabilssement=" + etabilssement + ", dateNaissance=" + dateNaissance + ", dateDebut="
-				+ dateDebut + ", datefin=" + datefin + ", diplome=" + diplome + ", classe=" + classe + ", type=" + type
-				+ ", stageof=" + stageof + ", sujet=" + sujet + ", description=" + description + ", cv=" + cv
-				+ ", demande=" + demande + ", user=" + user + "]";
+		return "StageDemande [nom=" + nom + ", numero=" + numero + ", prenom=" + prenom + ", email=" + email
+				+ ", etabilssement=" + etabilssement + ", dateNaissance=" + dateNaissance + ", dateDebut=" + dateDebut
+				+ ", datefin=" + datefin + ", diplome=" + diplome + ", classe=" + classe + ", type=" + type
+				+ ", stageof=" + stageof + ", status=" + status + ", sujet=" + sujet + ", description=" + description
+				+ ", cv=" + cv + ", demande=" + demande + ", user=" + user + "]";
 	}
+
+
+
+
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+	
 
 
 	

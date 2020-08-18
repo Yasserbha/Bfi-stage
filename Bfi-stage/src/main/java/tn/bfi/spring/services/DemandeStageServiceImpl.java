@@ -2,6 +2,7 @@ package tn.bfi.spring.services;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -10,10 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import tn.bfi.spring.entities.Classe;
+import tn.bfi.spring.entities.Etat;
+import tn.bfi.spring.entities.Niveau;
 import tn.bfi.spring.entities.StageDemande;
+import tn.bfi.spring.entities.StageOF;
 import tn.bfi.spring.entities.Stagiaire;
 import tn.bfi.spring.entities.TypeSatge;
 import tn.bfi.spring.repository.StageDemandeRepository;
+
 
 @Service
 public class DemandeStageServiceImpl implements IDemandeStageService {
@@ -29,6 +35,7 @@ public class DemandeStageServiceImpl implements IDemandeStageService {
 	
 	
 	public String cvname;
+	public String lettredemande;
 	
 	
 	@Override
@@ -37,7 +44,7 @@ public class DemandeStageServiceImpl implements IDemandeStageService {
 	}
 
 	@Override
-	public void uploadFile(MultipartFile file) {
+	public void uploadFile(MultipartFile file ) {
 		try {
 			StageDemande x = new StageDemande();
 			cvname = file.getOriginalFilename();
@@ -55,8 +62,9 @@ public class DemandeStageServiceImpl implements IDemandeStageService {
 
 	@Override
 	public StageDemande ajouterDemande(StageDemande demande) {
-		demande.setCv(cvname);
-	System.out.print(cvname+"ajouteeeeeeeeer");
+		if (demande.getCv() != null){
+		demande.setCv(cvname);}
+		demande.setDemande(lettredemande);
 		return demandesatgeRepository.save(demande);
 		}
 	
@@ -74,7 +82,7 @@ public class DemandeStageServiceImpl implements IDemandeStageService {
 
 	@Override
 	public StageDemande affichage(long id) {
-		StageDemande u= demandesatgeRepository.findById(id).orElse(null);;
+		StageDemande u= demandesatgeRepository.findById(id).orElse(null);
 		L.info("retrive Admin by id ++++:"+u);
 		return u;
 	};
@@ -82,6 +90,8 @@ public class DemandeStageServiceImpl implements IDemandeStageService {
 
 	@Override
 	public StageDemande update(StageDemande demande) {
+	
+		System.out.print(demande.getId()+"tessssssssst");
 		return demandesatgeRepository.save(demande);
 	}
 
@@ -89,6 +99,8 @@ public class DemandeStageServiceImpl implements IDemandeStageService {
 	public Long nbrdemande() {		
 		return demandesatgeRepository.count();
 	}
+
+
 
 
 

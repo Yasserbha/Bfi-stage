@@ -1,8 +1,10 @@
 package tn.bfi.spring.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import tn.bfi.spring.entities.Classe;
+import tn.bfi.spring.entities.Etat;
+import tn.bfi.spring.entities.Niveau;
 import tn.bfi.spring.entities.StageDemande;
+import tn.bfi.spring.entities.StageOF;
 import tn.bfi.spring.entities.TypeSatge;
 import tn.bfi.spring.services.IDemandeStageService;
-
-
 
 @CrossOrigin(origins = "*")
 @Controller
@@ -55,6 +59,7 @@ public class StageDemandeController {
 			stage.supprimerDemande(StageDemandeId);
 		}
 		// http://localhost:8081/SpringMVC/servlet/modify-StageDemande
+		@Modifying
 		@PutMapping("/modify-StageDemande")
 		@ResponseBody
 		public StageDemande modifySaleAd(@RequestBody StageDemande demande) {
@@ -73,4 +78,8 @@ public class StageDemandeController {
 		public List<StageDemande> getCustomerBynameroleJPQL(@PathVariable("name")String name,@PathVariable("type")TypeSatge type) {
 			return stage.getDemandeByNameTypeJPQL(name, type);
 		}
+	    
+	 
+	 
+		
 }
