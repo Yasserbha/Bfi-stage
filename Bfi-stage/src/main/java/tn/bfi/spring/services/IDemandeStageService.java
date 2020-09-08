@@ -25,5 +25,7 @@ public interface IDemandeStageService {
 	public 	Long nbrdemande();
 	public void uploadFile(MultipartFile file);
 	public List<StageDemande> getDemandeByNameTypeJPQL(String name, TypeSatge type);
-	;
+	public void uploadFile2(MultipartFile file );
+	 void run(String email) throws Exception;
+	
 }

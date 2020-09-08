@@ -28,7 +28,7 @@ public class LivrableServiceImpl implements ILivrableService {
 	
 	
 	public Long IdDemande ;
-	public String filename;
+	public String filename = null;
 	public StageDemande yasser ;
 
 	
@@ -40,9 +40,8 @@ public class LivrableServiceImpl implements ILivrableService {
 		try {
 			StageDemande x = new StageDemande();
 			filename = file.getOriginalFilename();
-			file.transferTo(new File ("C:\\livrable\\"+file.getOriginalFilename()));
-			System.out.print(filename+"uplodefile");
-		
+			file.transferTo(new File ("C:\\Users\\Yasser Bel Haj Ali\\bfi\\"+file.getOriginalFilename()));
+			System.out.print(filename+"fileeeeLIvrableeeeeeee");
 			
 		} catch (IllegalStateException | IOException e) {
 			// TODO Auto-generated catch block
@@ -74,7 +73,6 @@ public class LivrableServiceImpl implements ILivrableService {
 		livrable.setDatePostule(date);
 		livrable.setStagedemande(yasser);
 		livrable.setFile(filename);
-		System.out.print(livrable+"ajouteeeeeeeeeer");
 		return livrablerepository.save(livrable);
 	}
 

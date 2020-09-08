@@ -11,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+
 import tn.bfi.spring.entities.Classe;
 import tn.bfi.spring.entities.Etat;
 import tn.bfi.spring.entities.Niveau;
@@ -34,8 +38,9 @@ public class DemandeStageServiceImpl implements IDemandeStageService {
 	Stagiaire x;
 	
 	
-	public String cvname;
-	public String lettredemande;
+	public String cvname=null;
+	public String demandename=null;
+	
 	
 	
 	@Override
@@ -46,12 +51,23 @@ public class DemandeStageServiceImpl implements IDemandeStageService {
 	@Override
 	public void uploadFile(MultipartFile file ) {
 		try {
-			StageDemande x = new StageDemande();
+			
 			cvname = file.getOriginalFilename();
 			file.transferTo(new File ("C:\\pdf\\"+file.getOriginalFilename()));
-			System.out.print(cvname+"uplodefile");
+			System.out.print(cvname+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauplodefile");
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+	}
+	@Override
+	public void uploadFile2(MultipartFile file ) {
+		try {
 			
+			demandename = file.getOriginalFilename();
+			file.transferTo(new File ("C:\\pdf\\"+file.getOriginalFilename()));
+			System.out.print(demandename+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauplodefile");
 		} catch (IllegalStateException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,9 +78,8 @@ public class DemandeStageServiceImpl implements IDemandeStageService {
 
 	@Override
 	public StageDemande ajouterDemande(StageDemande demande) {
-		if (demande.getCv() != null){
-		demande.setCv(cvname);}
-		demande.setDemande(lettredemande);
+		demande.setCv(cvname);
+		demande.setDemande(demandename);
 		return demandesatgeRepository.save(demande);
 		}
 	
@@ -90,7 +105,6 @@ public class DemandeStageServiceImpl implements IDemandeStageService {
 
 	@Override
 	public StageDemande update(StageDemande demande) {
-	
 		System.out.print(demande.getId()+"tessssssssst");
 		return demandesatgeRepository.save(demande);
 	}
@@ -100,6 +114,17 @@ public class DemandeStageServiceImpl implements IDemandeStageService {
 		return demandesatgeRepository.count();
 	}
 
+	private final static String ACCOUNT_SID = "AC36edc7ad2c73f19b341b3c42be9cd716";
+	   private final static String AUTH_ID = "6c2ef750caceb356d4a3da3ef26211ef";
+
+	   static {
+	      Twilio.init(ACCOUNT_SID, AUTH_ID);
+	   }
+	 
+	   public void run(String email) throws Exception {
+	      Message.creator(new PhoneNumber("+21697105262"), new PhoneNumber("+19137351254"),
+	         "Merci pour votre intérêt pour le poste de Développeur au sein de BFI Group :"+email).create();
+	   }
 
 
 

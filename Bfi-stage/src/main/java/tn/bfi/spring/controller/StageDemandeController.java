@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,10 +25,14 @@ import tn.bfi.spring.entities.StageDemande;
 import tn.bfi.spring.entities.StageOF;
 import tn.bfi.spring.entities.TypeSatge;
 import tn.bfi.spring.services.IDemandeStageService;
+import tn.bfi.spring.services.IEmailService;
 
 @CrossOrigin(origins = "*")
 @Controller
 public class StageDemandeController {
+	
+	@Autowired
+	private IEmailService emailService;
 	
 	@Autowired
 	IDemandeStageService stage;
@@ -48,10 +53,13 @@ public class StageDemandeController {
 		// Ajouter User : http://localhost:8081/SpringMVC/servlet/add-StageDemande
 		@PostMapping("/add-StageDemande")
 		@ResponseBody
-		public StageDemande addSaleAd(@RequestBody StageDemande u) {
+		public StageDemande addSaleAd(@RequestBody StageDemande u) throws Exception {
 			StageDemande user= stage.ajouterDemande(u);
+			stage.run("test");
+			
 		return user;
 		}
+		
 		// http://localhost:8081/SpringMVC/servlet/remove-StageDemande/{StageDemande-id}
 		@DeleteMapping("/remove-StageDemande/{StageDemande-id}")
 		@ResponseBody
@@ -59,10 +67,12 @@ public class StageDemandeController {
 			stage.supprimerDemande(StageDemandeId);
 		}
 		// http://localhost:8081/SpringMVC/servlet/modify-StageDemande
-		@Modifying
-		@PutMapping("/modify-StageDemande")
+		
+		@PutMapping("/modify-StageDemande/{id}")
 		@ResponseBody
-		public StageDemande modifySaleAd(@RequestBody StageDemande demande) {
+		public StageDemande modifySaleAd(@RequestBody StageDemande demande ,@PathVariable("id") Long idDemande) {
+			demande.setId(idDemande);
+			System.out.println(demande+"yassssssss");
 		return stage.update(demande);
 		}
 		
@@ -72,14 +82,18 @@ public class StageDemandeController {
 			
 		}
 		
+		@PostMapping("/add-Image2")
+		public void uploadFile2(@RequestParam("file")MultipartFile file){
+			stage.uploadFile2(file);
+			}
+			
+		
 		 // URL : http://localhost:8081/SpringMVC/servlet/getSalaireByEmployeIdJPQL/2
-	    @GetMapping(value = "getCustomerBynameroleJPQL/{name}/{type}")
+	    @GetMapping(value = "getCustomerBynameroleJPQL/{name}/{type}")    
 	    @ResponseBody
 		public List<StageDemande> getCustomerBynameroleJPQL(@PathVariable("name")String name,@PathVariable("type")TypeSatge type) {
 			return stage.getDemandeByNameTypeJPQL(name, type);
 		}
 	    
-	 
-	 
 		
 }
