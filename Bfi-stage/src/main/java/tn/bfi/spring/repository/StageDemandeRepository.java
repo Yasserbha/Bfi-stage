@@ -21,8 +21,14 @@ import tn.bfi.spring.entities.TypeSatge;
 @Repository
 public interface StageDemandeRepository extends CrudRepository<StageDemande, Long>{
 	
-	@Query("select c from StageDemande c where c.nom=:nom or c.type=:type ")
-    public List<StageDemande> getDemandeByNameTypeJPQL(@Param("nom")String name, @Param("type")TypeSatge type);
+	@Query("select c from StageDemande c where c.nom=:nom or c.type=:type or c.status=:status ")
+    public List<StageDemande> getDemandeByNameTypeJPQL(@Param("nom")String name, @Param("type")TypeSatge type,@Param("status") Etat status);
 
+	@Query("select c from StageDemande c where c.nom=:nom")
+    public List<StageDemande> getDemandeByNameJPQL(@Param("nom")String name);
 	
+	@Query("select c from StageDemande c where c.type=:type or c.status=:status ")
+    public List<StageDemande> getDemandeByetatTypeJPQL( @Param("type")TypeSatge type,@Param("status") Etat status);
+
+
 }

@@ -44,13 +44,14 @@ import tn.bfi.spring.services.IStagiaireService;
 		Date debut;
 		Date fin;
 		Date Naissance;
-		/*
+		
 		debut = dateFormat.parse("01/02/2015");
 		fin = dateFormat.parse("01/02/2015");
 		Naissance = dateFormat.parse("01/02/2015");
 		
 		Stagiaire x = new Stagiaire("yasser","bha",24,"test","yasser.belhajali@esprit.tn",Sexe.homme);
 		sta.ajouterStagiaire(x);
+		/*
 		dem.ajouterDemande(demande);
 		x.setStagedemande(demande);
 		sta.ajouterStagiaire(x);
@@ -62,8 +63,8 @@ import tn.bfi.spring.services.IStagiaireService;
 		
 		*/
 		y=  dem.affichage(4);	
-		Livrable x = new Livrable("yasser","test",y);
-		livra.ajouterLivrable(x);
+		Livrable k = new Livrable("yasser","test",y);
+		//livra.ajouterLivrable(k);
 		/*
 		java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
 		debut =date ;

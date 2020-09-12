@@ -43,10 +43,7 @@ public class DemandeStageServiceImpl implements IDemandeStageService {
 	
 	
 	
-	@Override
-	public List<StageDemande> getDemandeByNameTypeJPQL(String name, TypeSatge type) {
-		return demandesatgeRepository.getDemandeByNameTypeJPQL(name, type);
-	}
+
 
 	@Override
 	public void uploadFile(MultipartFile file ) {

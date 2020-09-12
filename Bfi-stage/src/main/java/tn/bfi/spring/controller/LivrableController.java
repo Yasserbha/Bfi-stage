@@ -61,7 +61,7 @@ public class LivrableController {
 				return Ilivrable.getDemandeById(demandeId);
 			}
 			
-			  @GetMapping(path="/photoProduct/{id}", produces = MediaType.APPLICATION_PDF_VALUE)
+			  @GetMapping(path="/photoProduct/{id}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 			    public byte[] getPhoto(@PathVariable("id") Long id) throws Exception{
 			        Livrable p=livrab.findById(id).get();
 			        return Files.readAllBytes(Paths.get(System.getProperty("user.home")+"/bfi/"+p.getFile()));

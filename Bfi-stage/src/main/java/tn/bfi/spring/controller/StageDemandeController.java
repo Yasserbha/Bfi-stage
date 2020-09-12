@@ -24,6 +24,7 @@ import tn.bfi.spring.entities.Niveau;
 import tn.bfi.spring.entities.StageDemande;
 import tn.bfi.spring.entities.StageOF;
 import tn.bfi.spring.entities.TypeSatge;
+import tn.bfi.spring.repository.StageDemandeRepository;
 import tn.bfi.spring.services.IDemandeStageService;
 import tn.bfi.spring.services.IEmailService;
 
@@ -33,7 +34,8 @@ public class StageDemandeController {
 	
 	@Autowired
 	private IEmailService emailService;
-	
+	@Autowired
+	StageDemandeRepository repo ;
 	@Autowired
 	IDemandeStageService stage;
 	
@@ -89,10 +91,20 @@ public class StageDemandeController {
 			
 		
 		 // URL : http://localhost:8081/SpringMVC/servlet/getSalaireByEmployeIdJPQL/2
-	    @GetMapping(value = "getCustomerBynameroleJPQL/{name}/{type}")    
+	    @GetMapping(value = "getCustomerBynameroleJPQL/{name}/{type}/{etat}")    
 	    @ResponseBody
-		public List<StageDemande> getCustomerBynameroleJPQL(@PathVariable("name")String name,@PathVariable("type")TypeSatge type) {
-			return stage.getDemandeByNameTypeJPQL(name, type);
+		public List<StageDemande> getCustomerBynameroleJPQL(@PathVariable("name")String name,@PathVariable("type")TypeSatge type,@PathVariable("etat")Etat etat) {
+			return repo.getDemandeByNameTypeJPQL(name, type,etat);
+		}
+	    @GetMapping(value = "getCustomerBynameroleJPQL/{name}")    
+	    @ResponseBody
+		public List<StageDemande> getCustomerBynameJPQL(@PathVariable("name")String name) {
+			return repo.getDemandeByNameJPQL(name);
+		}
+	    @GetMapping(value = "getCustomerBynameroleJPQL/{type}/{etat}")    
+	    @ResponseBody
+		public List<StageDemande> getCustomerByetatroleJPQL(@PathVariable("type")TypeSatge type,@PathVariable("etat")Etat etat) {
+			return repo.getDemandeByetatTypeJPQL(type,etat);
 		}
 	    
 		
