@@ -1,11 +1,13 @@
 package tn.bfi.spring.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
-
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,10 +18,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import tn.bfi.spring.entities.Classe;
 import tn.bfi.spring.entities.Etat;
+import tn.bfi.spring.entities.Livrable;
 import tn.bfi.spring.entities.Niveau;
 import tn.bfi.spring.entities.StageDemande;
 import tn.bfi.spring.entities.StageOF;
@@ -29,7 +33,7 @@ import tn.bfi.spring.services.IDemandeStageService;
 import tn.bfi.spring.services.IEmailService;
 
 @CrossOrigin(origins = "*")
-@Controller
+@RestController
 public class StageDemandeController {
 	
 	@Autowired
@@ -38,6 +42,8 @@ public class StageDemandeController {
 	StageDemandeRepository repo ;
 	@Autowired
 	IDemandeStageService stage;
+	
+
 	
 	// http://localhost:8081/SpringMVC/servlet/retrieve-all-StageDemande
 		@GetMapping("/retrieve-all-StageDemande")
@@ -106,6 +112,18 @@ public class StageDemandeController {
 		public List<StageDemande> getCustomerByetatroleJPQL(@PathVariable("type")TypeSatge type,@PathVariable("etat")Etat etat) {
 			return repo.getDemandeByetatTypeJPQL(type,etat);
 		}
+	   /* 
+	    @GetMapping(path="/cvStagiaire/{id}", produces = MediaType.IMAGE_PNG_VALUE)
+	    public byte[] getPhoto(@PathVariable("id") Long id) throws Exception{
+	    	StageDemande p= repositorydemande.findById(id).get();
+	    	System.out.print(p.getCv()+"le cv est laaaaaaa");
+	        return null ;
+	    }*/
+	    @GetMapping(path="/cvProduct/{id}",produces = MediaType.APPLICATION_PDF_VALUE)
+	    public byte[] getPhoto(@PathVariable("id") Long id) throws Exception{
+	    	StageDemande p=repo.findById(id).get();
+	        return Files.readAllBytes(Paths.get(System.getProperty("user.home")+"/bficv/"+p.getCv()));
+	    }
 	    
 		
 }

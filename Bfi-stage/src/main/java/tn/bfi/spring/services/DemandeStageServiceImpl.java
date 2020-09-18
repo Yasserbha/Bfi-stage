@@ -50,7 +50,7 @@ public class DemandeStageServiceImpl implements IDemandeStageService {
 		try {
 			
 			cvname = file.getOriginalFilename();
-			file.transferTo(new File ("C:\\pdf\\"+file.getOriginalFilename()));
+			file.transferTo(new File ("C:\\Users\\Yasser Bel Haj Ali\\bficv\\"+file.getOriginalFilename()));
 			System.out.print(cvname+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauplodefile");
 		} catch (IllegalStateException | IOException e) {
 			// TODO Auto-generated catch block
